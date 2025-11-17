@@ -6,20 +6,10 @@ import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {
-<<<<<<< HEAD
-    useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY as string, {
-      api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
-      person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
-      defaults: '2025-05-24',
-      // Enable debug mode in development
-      loaded: (posthog) => {
-        if (process.env.NODE_ENV === 'development') posthog.debug()
-      }
-    })
-  }, [])
   return (
     <>
+      <Component {...pageProps} />
+
       <Script
         id="relyance-consent-agent"
         src="https://consent.app.relyancestage.xyz/relyance-agent.js"
@@ -27,13 +17,6 @@ export default function App({ Component, pageProps }: AppProps) {
         data-relyance-zero-fire-mode="true"
         strategy="afterInteractive"
       />
-      <PostHogProvider client={posthog}>
-        <Component {...pageProps} />
-      </PostHogProvider>
-      <Component {...pageProps} />
     </>
   );
-=======
-  return <Component {...pageProps} />;
->>>>>>> parent of d356cf1 (Updted Agent to staging tenant)
 }
