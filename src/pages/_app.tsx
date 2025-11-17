@@ -22,7 +22,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Script
         id="relyance-consent-agent"
-        src={process.env.NEXT_PUBLIC_RELYANE_SRC}
+        src={process.env.NEXT_PUBLIC_RELYANCE_SRC}
         data-relyance-consent-appId={process.env.NEXT_PUBLIC_RELYANCE_APPID}
         data-relyance-zero-fire-mode={process.env.NEXT_PUBLIC_RELYANCE_ZERO_FIRE_MODE}
         strategy="afterInteractive"
