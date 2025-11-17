@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
 import posthog from "posthog-js";
-import * as gtag from "../lib/gtag";
+import ReactGA from "react-ga4";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,22 +15,20 @@ const geistMono = Geist_Mono({
 
 export default function Home() {
   const handleTrackingTest = () => {
-    // Track event in Google Analytics
-    gtag.event({
-      action: "tracking_test_button_clicked",
-      params: {
-        category: "engagement",
-        label: "test_event",
-      },
-    });
+  // Track event in Google Analytics
+  ReactGA.event({
+    category: "engagement",
+    action: "tracking_test_button_clicked",
+    label: "test_event",
+  });
 
-    // Track event in PostHog
-    posthog.capture("tracking_test_button_clicked", {
-      timestamp: new Date().toISOString(),
-    });
+  // Track event in PostHog
+  posthog.capture("tracking_test_button_clicked", {
+    timestamp: new Date().toISOString(),
+  });
 
-    alert("Tracking events sent to Google Analytics and PostHog!");
-  };
+  alert("Tracking events sent to Google Analytics and PostHog!");
+};
   return (
     <div
       className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}

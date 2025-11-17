@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
+import ReactGA from 'react-ga4';
 import { useRouter } from 'next/router'
 import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
-import * as gtag from "../lib/gtag";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import Script from "next/script";
@@ -10,8 +10,15 @@ import Script from "next/script";
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
+
   useEffect(() => {
-    const handleRouteChange = (url: string) => gtag.pageview(url);
+    if (process.env.NEXT_PUBLIC_GA_ID) {
+      ReactGA.initialize(process.env.NEXT_PUBLIC_GA_ID);
+      ReactGA.send({ hitType: 'pageview', page: window.location.pathname });
+    }
+    const handleRouteChange = (url: string) => {
+      ReactGA.send({ hitType: 'pageview', page: url });
+    };
     router.events.on("routeChangeComplete", handleRouteChange);
     return () => router.events.off("routeChangeComplete", handleRouteChange);
   }, [router.events]);
@@ -39,20 +46,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <PostHogProvider client={posthog}>
         <Component {...pageProps} />
       </PostHogProvider>
-      {/* GA Script */}
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-        strategy="afterInteractive"
-      />
-      <Script id="ga-init" strategy="afterInteractive">
-        {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}', { send_page_view: false });
-        `}
-      </Script>
-      <Component {...pageProps} />
     </>
   );
 }
