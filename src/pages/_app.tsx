@@ -36,7 +36,6 @@ export default function App({ Component, pageProps }: AppProps) {
         data-relyance-zero-fire-mode={process.env.NEXT_PUBLIC_RELYANCE_ZERO_FIRE_MODE}
         strategy="beforeInteractive"
       />
-      {/* <Script src="/rly-debug.js" strategy="afterInteractive" /> */}
       <PostHogProvider client={posthog}>
         <Component {...pageProps} />
       </PostHogProvider>
