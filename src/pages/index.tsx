@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
+import posthog from "posthog-js";
+import * as gtag from "../lib/gtag";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +14,23 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+  const handleTrackingTest = () => {
+    // Track event in Google Analytics
+    gtag.event({
+      action: "tracking_test_button_clicked",
+      params: {
+        category: "engagement",
+        label: "test_event",
+      },
+    });
+
+    // Track event in PostHog
+    posthog.capture("tracking_test_button_clicked", {
+      timestamp: new Date().toISOString(),
+    });
+
+    alert("Tracking events sent to Google Analytics and PostHog!");
+  };
   return (
     <div
       className={`${geistSans.className} ${geistMono.className} flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black`}
@@ -48,6 +67,12 @@ export default function Home() {
           </p>
         </div>
         <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
+          <button
+            onClick={handleTrackingTest}
+            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-green-600 px-5 text-white transition-colors hover:bg-green-700 dark:hover:bg-green-500 md:w-[158px]"
+          >
+            Test Tracking
+          </button>
           <a
             className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
             href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
