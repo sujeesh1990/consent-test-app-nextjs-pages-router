@@ -34,7 +34,7 @@ export default function App({ Component, pageProps }: AppProps) {
         src={process.env.NEXT_PUBLIC_RELYANCE_SRC}
         data-relyance-consent-appId={process.env.NEXT_PUBLIC_RELYANCE_APPID}
         data-relyance-zero-fire-mode={process.env.NEXT_PUBLIC_RELYANCE_ZERO_FIRE_MODE}
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
       />
       <PostHogProvider client={posthog}>
         <Component {...pageProps} />
