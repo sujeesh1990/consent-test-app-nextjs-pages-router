@@ -4,9 +4,9 @@ import posthog from 'posthog-js'
 import { PostHogProvider } from 'posthog-js/react'
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import Script from "next/script";
 
 export default function App({ Component, pageProps }: AppProps) {
+<<<<<<< HEAD
     useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY as string, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://eu.i.posthog.com',
@@ -33,4 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
     </>
   );
+=======
+  return <Component {...pageProps} />;
+>>>>>>> parent of d356cf1 (Updted Agent to staging tenant)
 }
