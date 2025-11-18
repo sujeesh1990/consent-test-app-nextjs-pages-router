@@ -9,6 +9,14 @@ import Script from "next/script";
 
 export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
+  const relyanceScript = (
+    <Script
+        strategy="beforeInteractive"
+        data-relyance-consent-appId={process.env.NEXT_PUBLIC_RELYANCE_APPID}
+        data-relyance-zero-fire-mode={process.env.NEXT_PUBLIC_RELYANCE_ZERO_FIRE_MODE}
+        src={process.env.NEXT_PUBLIC_RELYANCE_SRC} 
+      />
+  );
 
 
   useEffect(() => {
@@ -36,13 +44,14 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [])
   return (
     <>
-      <Script
+      {relyanceScript}
+      {/* <Script
         id="relyance-consent-agent"
         src={process.env.NEXT_PUBLIC_RELYANCE_SRC}
         data-relyance-consent-appId={process.env.NEXT_PUBLIC_RELYANCE_APPID}
         data-relyance-zero-fire-mode={process.env.NEXT_PUBLIC_RELYANCE_ZERO_FIRE_MODE}
         strategy="beforeInteractive"
-      />
+      />  */}
       <PostHogProvider client={posthog}>
         <Component {...pageProps} />
       </PostHogProvider>
