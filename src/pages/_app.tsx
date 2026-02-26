@@ -12,6 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const relyanceScript = (
     <Script
         strategy="beforeInteractive"
+        data-relyance-pattern-match="true"
         data-relyance-consent-appId={process.env.NEXT_PUBLIC_RELYANCE_APPID}
         data-relyance-zero-fire-mode={process.env.NEXT_PUBLIC_RELYANCE_ZERO_FIRE_MODE}
         src={process.env.NEXT_PUBLIC_RELYANCE_SRC} 
