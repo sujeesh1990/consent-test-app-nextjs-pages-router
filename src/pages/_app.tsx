@@ -15,7 +15,10 @@ export default function App({ Component, pageProps }: AppProps) {
         data-relyance-pattern-match="true"
         data-relyance-consent-appId={process.env.NEXT_PUBLIC_RELYANCE_APPID}
         data-relyance-zero-fire-mode={process.env.NEXT_PUBLIC_RELYANCE_ZERO_FIRE_MODE}
-        src={process.env.NEXT_PUBLIC_RELYANCE_SRC} 
+        src={process.env.NEXT_PUBLIC_RELYANCE_SRC}
+        data-relyance-pattern-match={process.env.NEXT_PUBLIC_RELYANCE_PATTERN_MATCH_ENABLED}
+        data-relyance-skip-url-patterns={process.env.NEXT_PUBLIC_RELYANCE_SKIP_URL_PATTERN}
+        data-relyance-skip-inline={process.env.NEXT_PUBLIC_RELYANCE_SKIP_INLINE_ENABLED}
       />
   );
 
